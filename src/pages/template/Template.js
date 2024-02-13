@@ -1,9 +1,12 @@
 import { useState, useCallback } from "react";
 import Drawer from "../../components/drawer/Drawer";
 import PortalDrawer from "../../components/portals/PortalDrawer";
+import Explore from "../childrenFrames/Explore";
+import Profile from "../childrenFrames/Profile";
 
 function Template({ children }) {
   const [isFrameOpen, setFrameOpen] = useState(false);
+  const [selectedFrame, setSelectedFrame] = useState(null);
 
   const openFrame = useCallback(() => {
     setFrameOpen(true);
@@ -12,6 +15,23 @@ function Template({ children }) {
   const closeFrame = useCallback(() => {
     setFrameOpen(false);
   }, []);
+
+  const handleOptionClick = useCallback((option) => {
+    setSelectedFrame(option);
+    openFrame();
+  }, [openFrame]);
+
+
+  switch (selectedFrame) {
+    case "explore":
+      children = <Explore />;
+      break;
+    case "profile":
+      children = <Profile />;
+      break;
+    default:
+      children = <Profile />;
+  }
 
   return (
     <>
@@ -82,11 +102,17 @@ function Template({ children }) {
             </div>
           </div>
         </div>
-       {children}
+        <svg width="1530" height="1">
+          <line x1="0" y1="0" x2="1530" y2="0" stroke="lightgray" strokeWidth="2" />
+        </svg>
+        <div className="px-10 width-full"> 
+          {children}
+        </div>
+       
       </div>
       {isFrameOpen && (
         <PortalDrawer placement="Left" onOutsideClick={closeFrame}>
-          <Drawer onClose={closeFrame} />
+          <Drawer onClose={closeFrame} onSelectOption={handleOptionClick}  />
         </PortalDrawer>
       )}
     </>

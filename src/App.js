@@ -10,7 +10,7 @@ import SignupUserInformation from "./pages/signup/SignupUserInformation";
 import SignupUserInterest from "./pages/signup/SignupUserInterest";
 import SignIn from "./pages/signin/SignIn";
 import Template from "./pages/template/Template";
-import Explore from "./pages/childrenFrames/Explore";
+import Profile from "./pages/childrenFrames/Profile";
 
 function App() {
   const action = useNavigationType();
@@ -44,7 +44,7 @@ function App() {
         title = "";
         metaDescription = "";
         break;
-      case "/template":
+      case "/home":
         title = "";
         metaDescription = "";
         break;
@@ -70,7 +70,7 @@ function App() {
       <Route path="/user-information" element={<SignupUserInformation />} />
       <Route path="/user-interest" element={<SignupUserInterest />} />
       <Route path="/signin" element={<SignIn />} />
-      <Route path="/template" element={<Template children={<Explore />} />}> 
+      <Route path="/template" element={<Template children={<Profile />} />}> 
       </Route>
     </Routes>
   );

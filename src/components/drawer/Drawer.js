@@ -1,8 +1,12 @@
 import { useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Drawer = ({ onClose }) => {
+function Drawer({ onClose, onSelectOption }) {
   const navigate = useNavigate();
+  const handleOptionClick = (option) => {
+    onSelectOption(option);
+    onClose(); 
+  };
   useEffect(() => {
     const scrollAnimElements = document.querySelectorAll(
       "[data-animate-on-scroll]"
@@ -39,10 +43,10 @@ const Drawer = ({ onClose }) => {
 
   return (
     <div
-      className="w-[264px] bg-white overflow-hidden flex flex-row items-center justify-start py-0 pr-1 pl-0 box-border gap-[2px] [&.animate]:animate-[0.25s_ease_0s_1_normal_forwards_slide-in-left] opacity-[0] h-full max-w-[90%]"
+      className="shadow-[0px_0px_10px_rgba(0,_0,_0,_0.15)] marginRight-[100px]  w-[264px] bg-white overflow-hidden flex flex-row items-center justify-start py-0 pr-1 pl-0 box-border gap-[2px] [&.animate]:animate-[0.25s_ease_0s_1_normal_forwards_slide-in-left] opacity-[0] h-full max-w-[90%]"
       data-animate-on-scroll
     >
-      <section className="flex-1 flex flex-col items-start justify-start pt-0 px-0 pb-[13px] text-left text-xl text-slategray font-lalezar">
+      <section className="flex-1 flex flex-col items-start justify-start pt-0 px-0 pb-[15px] text-left text-xl text-slategray font-lalezar">
         <div className="self-stretch flex flex-col items-center justify-start gap-[346px]">
           <div className="self-stretch flex flex-col items-center justify-start gap-[28px]">
             <div className="self-stretch flex flex-col items-center justify-start gap-[20px]">
@@ -61,24 +65,25 @@ const Drawer = ({ onClose }) => {
                       </div>
                     </div>
                   </div>
+                  
                   <img
-                    className="h-5 w-[26px] relative cursor-pointer"
+                    className="h-[-2px] w-[20px] right-5 absolute cursor-pointer"
                     loading="eager"
                     alt=""
                     src="/closeDrawerArrow.svg"
                     onClick={onClose}
                   />
+                  
                 </div>
+                
               </div>
-              <img
-                className="self-stretch h-px relative max-w-full overflow-hidden shrink-0"
-                loading="eager"
-                alt=""
-                src="/vector-15.svg"
-              />
+              <svg width="1530" height="1">
+                <line x1="0" y1="0" x2="1530" y2="0" stroke="lightgray" strokeWidth="2" />
+             </svg>
             </div>
             <div className="self-stretch flex flex-col items-start justify-start py-0 px-[18px] gap-[15px] text-base font-inter">
-              <div className="self-stretch rounded-md hover:bg-blueviolet bg-transparent overflow-hidden flex flex-row items-center justify-start pt-[3px] px-[5px] pb-[5px] hover:cursor-pointer ">
+              <div className="self-stretch rounded-md hover:bg-blueviolet bg-transparent overflow-hidden flex flex-row items-center justify-start pt-[3px] px-[5px] pb-[5px] hover:cursor-pointer "
+               onClick={() => handleOptionClick("profile")}>
                 <div className="flex flex-row items-end justify-start gap-[11px]">
                   <img
                     className="h-[29px] w-[29px] relative"
@@ -86,7 +91,8 @@ const Drawer = ({ onClose }) => {
                     src="/profileIcon.svg"
                   />
                   <div
-                    className="w-[calc(100%_-_29px)] [border:none] [outline:none] font-medium font-inter text-base bg-[transparent] h-8 relative text-slategray text-left flex items-center min-w-[29px]"
+                    className="w-[calc(100%_-_29px)] [border:none] [outline:none] font-medium font-inter text-base bg-[transparent] h-8 relative text-slategray text-left flex items-center min-w-[29px]
+                    "
                   >
                   Profile 
                   </div>
@@ -118,7 +124,9 @@ const Drawer = ({ onClose }) => {
                 </div>
               </div>
               <div className="self-stretch rounded-md overflow-hidden flex flex-row items-center justify-start py-0 pr-[13px] pl-[3px] hover:cursor-pointer hover:bg-blueviolet bg-transparent">
-                <div className="flex flex-row items-end justify-start py-[9px] px-0 gap-[5px]">
+                <div className="flex flex-row items-end justify-start py-[9px] px-0 gap-[5px]"
+                onClick={() => handleOptionClick("explore")}
+                >
                   <img
                     className="h-[22.5px] w-[30px] relative"
                     loading="eager"
@@ -152,16 +160,19 @@ const Drawer = ({ onClose }) => {
                 Log out
                </div>
               </div>
+              
             </div>
           </div>
+
+         
+
         </div>
+        
+
       </section>
-      <img
-        className="h-[750px] w-px relative"
-        loading="eager"
-        alt=""
-        src="/vector-14.svg"
-      />
+      
+    
+  
     </div>
   );
 };
