@@ -2,7 +2,7 @@
  * @param {string} key
  * returns JSON.parse(data)
  */
-export function loadData(key) 
+export function getData(key) 
 {
 	try 
 	{
@@ -24,3 +24,23 @@ export function saveData(key, data)
 {
 	localStorage.setItem(key, JSON.stringify(data));
 }
+
+/**
+ * @param {string} key
+ * @param {any} newData
+ */
+export function updateData(key, newData) {
+    try {
+      let existingData = localStorage.getItem(key);
+      existingData = JSON.parse(existingData);
+      const updatedData = { ...existingData, ...newData };
+      localStorage.setItem(key, JSON.stringify(updatedData));
+      return updatedData;
+    } 
+    catch (error) 
+    {
+      console.error('Error updating data:', error);
+      return undefined;
+    }
+  }
+  
