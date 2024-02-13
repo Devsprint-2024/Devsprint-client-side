@@ -5,8 +5,10 @@ import {
   useNavigationType,
   useLocation,
 } from "react-router-dom";
-import LandingPage from "./pages/LandingPage";
-import SignUp from "./pages/SignUp";
+import LandingPage from "./pages/landingPage/LandingPage";
+import SignupUserInformation from "./pages/signup/SignupUserInformation";
+import SignupUserInterest from "./pages/signup/SignupUserInterest";
+import SignIn from "./pages/signin/SignIn";
 
 function App() {
   const action = useNavigationType();
@@ -28,11 +30,19 @@ function App() {
         title = "";
         metaDescription = "";
         break;
-      case "/signup-1":
+      case "/user-information":
         title = "";
         metaDescription = "";
         break;
-    }
+      case "/user-interest":
+        title = "";
+        metaDescription = "";
+        break;
+      case "/signin":
+        title = "";
+        metaDescription = "";
+        break;
+  }
 
     if (title) {
       document.title = title;
@@ -51,7 +61,9 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<LandingPage />} />
-      <Route path="/signup-1" element={<SignUp />} />
+      <Route path="/user-information" element={<SignupUserInformation />} />
+      <Route path="/user-interest" element={<SignupUserInterest />} />
+      <Route path="/signin" element={<SignIn />} />
     </Routes>
   );
 }

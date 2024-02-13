@@ -1,19 +1,23 @@
 import { useCallback } from "react";
-import Frame from "../components/Frame";
+import ExtendedLogo from "../../components/logo/ExtendedLogo";
 import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   const navigate = useNavigate();
 
   const onCallToActionClick = useCallback(() => {
-    navigate("/signup-1");
+    navigate("/user-information");
+  }, [navigate]);
+  
+  const onSignInClick = useCallback(() => {
+    navigate("/signin");
   }, [navigate]);
 
   return (
     <div className="w-full relative bg-white overflow-hidden flex flex-col items-center justify-start pt-[38px] pb-[93px] pr-[67px] pl-[35px] box-border gap-[59px] tracking-[normal] mq750:pr-[33px] mq750:box-border mq450:gap-[59px]">
       <section className="self-stretch flex flex-row items-start justify-start max-w-full text-left text-[45px] text-darkslateblue font-lalezar">
         <div className="w-[1218px] flex flex-col items-start justify-start gap-[18px] max-w-full">
-          <Frame />
+          <ExtendedLogo />
           <div className="self-stretch flex flex-row items-start justify-end">
             <h1 className="m-0 h-[71px] relative text-inherit font-normal font-inherit inline-block mq750:text-[36px] mq450:text-[27px]">
               Welcome to Nexus: Your Collaborative Project Hub
@@ -27,7 +31,7 @@ const LandingPage = () => {
             className="h-[519px] flex-1 relative max-w-full overflow-hidden object-cover min-w-[461px] mq750:min-w-full"
             loading="eager"
             alt=""
-            src="/objects-1@2x.png"
+            src="/introductionPic.png"
           />
           <div className="w-[633px] flex flex-col items-start justify-start pt-6 px-0 pb-0 box-border min-w-[633px] max-w-full mq1100:min-w-full mq1275:flex-1">
             <div className="self-stretch flex flex-col items-start justify-start gap-[34px] mq750:gap-[34px]">
@@ -57,7 +61,9 @@ const LandingPage = () => {
                   <div className="relative whitespace-nowrap">
                     Already have an account?
                   </div>
-                  <div className="relative font-medium whitespace-nowrap">
+                  <div className="relative font-medium whitespace-nowrap hover:cursor-pointer hover:[text-decoration:underline]"
+                  onClick = {onSignInClick}
+                  >
                     Sign in
                   </div>
                 </div>
