@@ -82,7 +82,7 @@ function Drawer({ onClose, onSelectOption }) {
              </svg>
             </div>
             <div className="self-stretch flex flex-col items-start justify-start py-0 px-[18px] gap-[15px] text-base font-inter">
-              <div className="self-stretch rounded-md hover:bg-blueviolet bg-transparent overflow-hidden flex flex-row items-center justify-start pt-[3px] px-[5px] pb-[5px] hover:cursor-pointer "
+              <div className="self-stretch rounded-md hover:bg-blueviolet-200 bg-transparent overflow-hidden flex flex-row items-center justify-start pt-[3px] px-[5px] pb-[5px] hover:cursor-pointer "
                onClick={() => handleOptionClick("profile")}>
                 <div className="flex flex-row items-end justify-start gap-[11px]">
                   <img
@@ -99,8 +99,8 @@ function Drawer({ onClose, onSelectOption }) {
                 </div>
               </div>
               <div
-                className="self-stretch rounded-md overflow-hidden flex flex-row items-center justify-start py-0 px-1.5 hover:cursor-pointer hover:bg-blueviolet bg-transparent"
-                onClick={onFrameContainer1Click}
+                className="self-stretch rounded-md overflow-hidden flex flex-row items-center justify-start py-0 px-1.5 hover:cursor-pointer hover:bg-blueviolet-200 bg-transparent"
+                onClick={() => handleOptionClick("myProjects")}
               >
                 <div className="flex flex-row items-center justify-start py-2 px-0 gap-[14px]">
                   <img
@@ -112,7 +112,7 @@ function Drawer({ onClose, onSelectOption }) {
                   <div className="relative font-medium">Projects</div>
                 </div>
               </div>
-              <div className="self-stretch rounded-md overflow-hidden flex flex-row items-center justify-start py-0 px-[7px] hover:cursor-pointer hover:bg-blueviolet bg-transparent">
+              <div className="self-stretch rounded-md overflow-hidden flex flex-row items-center justify-start py-0 px-[7px] hover:cursor-pointer hover:bg-blueviolet-200 bg-transparent">
                 <div className="flex flex-row items-center justify-start pt-2.5 px-0 pb-[9px] gap-[15px] ">
                   <img
                     className="h-[21px] w-[21px] relative min-h-[21px]"
@@ -123,7 +123,7 @@ function Drawer({ onClose, onSelectOption }) {
                   <div className="relative font-medium">Message</div>
                 </div>
               </div>
-              <div className="self-stretch rounded-md overflow-hidden flex flex-row items-center justify-start py-0 pr-[13px] pl-[3px] hover:cursor-pointer hover:bg-blueviolet bg-transparent">
+              <div className="self-stretch rounded-md overflow-hidden flex flex-row items-center justify-start py-0 pr-[13px] pl-[3px] hover:cursor-pointer hover:bg-blueviolet-200 bg-transparent">
                 <div className="flex flex-row items-end justify-start py-[9px] px-0 gap-[5px]"
                 onClick={() => handleOptionClick("explore")}
                 >

@@ -1,13 +1,18 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Drawer from "../../components/drawer/Drawer";
 import PortalDrawer from "../../components/portals/PortalDrawer";
 import Explore from "../childrenFrames/Explore";
 import Profile from "../childrenFrames/Profile";
+import OpenSourceProjects from "../childrenFrames/OpenSourceProjects";
+import MyProjects from "../childrenFrames/MyProjects";
+import CreateProject from "../childrenFrames/CreateProject";
 
 function Template({ children }) {
   const [isFrameOpen, setFrameOpen] = useState(false);
-  const [selectedFrame, setSelectedFrame] = useState(null);
+  const [selectedFrame, setSelectedFrame] = useState(localStorage.getItem('selectedFrame'));
+  const [selectedOption, setSelectedOption] = useState(null);
 
+  
   const openFrame = useCallback(() => {
     setFrameOpen(true);
   }, []);
@@ -21,17 +26,15 @@ function Template({ children }) {
     openFrame();
   }, [openFrame]);
 
+  const handleChildrenClick = useCallback((option) => {
+    setSelectedFrame(option);
+  }, []);
 
-  switch (selectedFrame) {
-    case "explore":
-      children = <Explore />;
-      break;
-    case "profile":
-      children = <Profile />;
-      break;
-    default:
-      children = <Profile />;
-  }
+
+  useEffect(() => {
+    localStorage.setItem('selectedFrame', selectedFrame);
+  }, [selectedFrame]); 
+  
 
   return (
     <>
@@ -106,7 +109,12 @@ function Template({ children }) {
           <line x1="0" y1="0" x2="1530" y2="0" stroke="lightgray" strokeWidth="2" />
         </svg>
         <div className="px-10 width-full"> 
-          {children}
+        {selectedFrame === "explore" && <Explore onSelectOption = {handleChildrenClick}/>}
+        {selectedFrame === "profile" && <Profile />}
+        {selectedFrame === "engineeringCard" && <OpenSourceProjects />}
+        {selectedFrame === "myProjects" && <MyProjects onSelectOption={handleChildrenClick} />}
+        {selectedFrame === "createProject" && <CreateProject />}
+        {selectedFrame === "" && <Profile />}
         </div>
        
       </div>

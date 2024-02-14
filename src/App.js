@@ -11,6 +11,7 @@ import SignupUserInterest from "./pages/signup/SignupUserInterest";
 import SignIn from "./pages/signin/SignIn";
 import Template from "./pages/template/Template";
 import Profile from "./pages/childrenFrames/Profile";
+import OpenSourceProjects from "./pages/childrenFrames/OpenSourceProjects";
 
 function App() {
   const action = useNavigationType();
@@ -70,7 +71,8 @@ function App() {
       <Route path="/user-information" element={<SignupUserInformation />} />
       <Route path="/user-interest" element={<SignupUserInterest />} />
       <Route path="/signin" element={<SignIn />} />
-      <Route path="/template" element={<Template children={<Profile />} />}> 
+      <Route path="/template" element={<Template selectedFrame={<Profile />} />}>
+    
       </Route>
     </Routes>
   );
