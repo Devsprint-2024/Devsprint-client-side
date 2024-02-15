@@ -5,7 +5,12 @@ import Explore from "../childrenFrames/Explore";
 import Profile from "../childrenFrames/Profile";
 import OpenSourceProjects from "../childrenFrames/OpenSourceProjects";
 import MyProjects from "../childrenFrames/MyProjects";
+import SearchResults from "../childrenFrames/SearchResults";
 import CreateProject from "../childrenFrames/CreateProject";
+import CodeEditor from "../childrenFrames/CodeEditor";
+import CommitHistory from "../childrenFrames/CommitHistory";
+import ActiveDomains from "../childrenFrames/ActiveDomains";
+import SingleProjectFile from "../childrenFrames/SingleProjectFile";
 
 function Template({ children }) {
   const [isFrameOpen, setFrameOpen] = useState(false);
@@ -59,15 +64,17 @@ function Template({ children }) {
               </div>
               <div className="flex-1 rounded-md bg-whitesmoke flex flex-row items-center justify-start py-0 px-[9px] box-border gap-[10px] min-w-[159px] max-w-full">
                 <div className="self-stretch w-[417px] relative rounded-md bg-whitesmoke hidden max-w-full" />
-                <img
-                  className="h-[18px] w-[18px] relative z-[1]"
+               
+                <input
+                  className="w-[380px] [border:none] [outline:none] font-inter text-sm bg-[transparent] h-[33px] relative text-slategray text-left flex items-center z-[1]"
+                  placeholder="Search for anything..."
+                  type="search"
+                />
+                 <img
+                  className="h-[18px] w-[18px] relative z-[1] hover:cursor-pointer"
+                  onClick = {() => handleChildrenClick("searchResults")}
                   alt=""
                   src="/searchButtonIcon.svg"
-                />
-                <input
-                  className="w-[141px] [border:none] [outline:none] font-inter text-sm bg-[transparent] h-[33px] relative text-slategray text-left flex items-center z-[1]"
-                  placeholder="Search for anything..."
-                  type="text"
                 />
               </div>
             </div>
@@ -109,12 +116,21 @@ function Template({ children }) {
           <line x1="0" y1="0" x2="1530" y2="0" stroke="lightgray" strokeWidth="2" />
         </svg>
         <div className="px-10 width-full"> 
-        {selectedFrame === "explore" && <Explore onSelectOption = {handleChildrenClick}/>}
-        {selectedFrame === "profile" && <Profile />}
-        {selectedFrame === "engineeringCard" && <OpenSourceProjects />}
-        {selectedFrame === "myProjects" && <MyProjects onSelectOption={handleChildrenClick} />}
-        {selectedFrame === "createProject" && <CreateProject />}
-        {selectedFrame === "" && <Profile />}
+          {selectedFrame === "explore" && <Explore onSelectOption = {handleChildrenClick}/>}
+          {selectedFrame === "profile" && <Profile />}
+          {selectedFrame === "engineeringCard" && <OpenSourceProjects />}
+          {selectedFrame === "artsCard" && <OpenSourceProjects />}
+          {selectedFrame === "designCard" && <OpenSourceProjects />}
+          {selectedFrame === "educatiionCard" && <OpenSourceProjects />}
+          {selectedFrame === "scienceCard" && <OpenSourceProjects />}
+          {selectedFrame === "myProjects" && <MyProjects onSelectOption={handleChildrenClick} />}
+          {selectedFrame === "createProject" && <CreateProject />}
+          {selectedFrame === "searchResults" && <SearchResults />}
+          {selectedFrame === "singleProjectFile" && <SingleProjectFile />}
+          {selectedFrame === "commitHistory" && <CommitHistory />}
+          {selectedFrame === "codeEditor" && <CodeEditor />}
+          {selectedFrame === "activeDomains" && <ActiveDomains />}
+          {selectedFrame === "" && <Profile />}
         </div>
        
       </div>

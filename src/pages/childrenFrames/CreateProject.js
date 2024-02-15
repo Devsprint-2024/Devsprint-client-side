@@ -1,7 +1,11 @@
 const CreateProject = () => {
     return (
       <div className="w-full relative bg-white overflow-hidden flex flex-col items-start justify-start pt-4 pb-9 pr-[33px] pl-[21px] box-border gap-[62px] tracking-[normal] text-left text-7xl text-black font-inter mq450:gap-[62px] mq725:gap-[62px]">
-        <h2 className="m-0 w-[1101px] relative text-inherit capitalize font-medium font-inherit inline-block max-w-full shrink-0 mq450:text-2xl">{`My Projects > Create New project`}</h2>
+      <div className="m-0 flex items-center gap-[10px] max-w-full shrink-0">
+        <div className="relative text-inherit capitalize font-medium font-inherit inline-block max-w-full shrink-0 mq450:text-2xl hover:cursor-pointer hover:[text-decoration:underline]">Go Back to My Projects</div>
+        <div className="m-0 text-inherit capitalize font-medium font-inherit max-w-full shrink-0 mq450:text-2xl">> Create New project</div>
+      </div>
+
         <form className="m-0 self-stretch flex flex-col items-start justify-start gap-[32px] max-w-full shrink-0 mq650:gap-[32px]">
           <div className="self-stretch flex flex-col items-start justify-start gap-[10px] max-w-full">
             <div className="w-[673px] flex flex-row items-start justify-between gap-[20px] max-w-full mq450:flex-wrap">
@@ -27,7 +31,7 @@ const CreateProject = () => {
             <div className="relative text-3xl-5 font-semibold font-open-sans text-darkslategray-200 text-left mq450:text-lg">
               Project Description
             </div>
-            <input
+            <textarea
               className="[outline:none] bg-[transparent] self-stretch h-[106px] relative rounded-mini box-border min-w-[250px] border-[1.5px] border-solid border-gainsboro"
               type="text"
             />
@@ -39,14 +43,12 @@ const CreateProject = () => {
                   <img
                     className="w-[18px] h-[18px] relative"
                     alt=""
-                    src="/vuesaxlinearaddsquare.svg"
+                    src="/littleAddButton.svg"
                   />
                 </div>
-                <input
+                <div
                   className="w-[42px] [border:none] [outline:none] font-medium font-inter text-base bg-[transparent] h-[19px] relative capitalize text-blueviolet-100 text-left inline-block"
-                  placeholder="Invite"
-                  type="text"
-                />
+                > Invite </div>
                 <div className="h-[39px] flex-1 relative bg-red overflow-hidden" />
               </div>
               <div className="relative text-base capitalize font-inter text-gray-300 text-left">{`Invite people to the project based on the shared interests and matching skillsets. `}</div>

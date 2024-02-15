@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import MyProjectsDatagrid from "../../components/datagrids/MyProjectsDatagrid";
 
 const MyProjects = ({onSelectOption}) => {
   const navigate = useNavigate();
@@ -34,14 +35,16 @@ const MyProjects = ({onSelectOption}) => {
           </div>
           <div className="flex flex-col items-start justify-start pt-1 px-0 pb-0">
             <div
-              className="relative capitalize font-medium whitespace-nowrap cursor-pointer"
+              className="relative capitalize font-medium whitespace-nowrap cursor-pointer hover:[text-decoration:underline]"
               onClick={() => handleOptionClick("createProject")}
             >
               +Create new Project
             </div>
           </div>
         </header>
-        <div className="self-stretch flex-1 relative bg-blue-300" />
+        <div className="self-stretch flex-1 relative">
+          <MyProjectsDatagrid />
+        </div>
       </section>
     </div>
   );
