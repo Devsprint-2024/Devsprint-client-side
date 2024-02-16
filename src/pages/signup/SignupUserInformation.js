@@ -138,7 +138,7 @@ const fileInputRef = useRef(null);
     setShowPassword2(!showPassword2);
   }
   const handleSubmit = () => {
-    console.log("Hi here");
+    //console.log("Hi here");
     const imageUrl = imageUrls.length > 0 ? imageUrls[0] : null;
     saveData('user', {
       firstname,

@@ -56,20 +56,22 @@ const SignupUserInterest = () => {
     };
   }, []);
 
+  const [user, setUser] = useState([]);
  // console.log(selectedDisciplines.discipline);
   const handleSubmit = () => {
-    console.log("Hi here");
-    updateData('user', {
+    const userData = getData('user');
+    if (userData) 
+    {
+      const updatedUserData = {
+        ...userData,
         discipline: selectedDisciplines?.discipline,
         designation: selectedDesignation,
-    });
-
+      };
+    }
+    console.log(updatedUserData);
     
 
-
-
-
-  };
+};
   
   return (
     <footer className="w-full bg-aliceblue overflow-hidden flex flex-col items-start justify-start pt-[34px] px-[37px] pb-[167px] box-border gap-[188px] tracking-[normal] text-left text-xl font-lalezar mq450:gap-[188px] mq1025:gap-[188px]">
@@ -84,6 +86,7 @@ const SignupUserInterest = () => {
           <form
             className="m-0 self-stretch rounded-[10px] bg-white shadow-[0px_4px_63px_rgba(0,_0,_0,_0.15)] overflow-hidden flex flex-col items-center justify-start pt-[150px] px-[54px] pb-[165px] gap-[63px_10px] [&.animate]:animate-[1s_ease_0.5s_1_normal_forwards_fade-in] opacity-[0] mq750:gap-[63px_10px] mq750:pt-[97px] mq750:pb-[107px] mq750:box-border mq1125:gap-[63px_10px] mq1125:pl-[27px] mq1125:pr-[27px] mq1125:box-border"
             data-animate-on-scroll
+            onSubmit={handleSubmit}
           >
             <b className="relative text-[25px] tracking-[0.1px] leading-[32px] font-poppins text-darkblue text-center mq450:text-xl mq450:leading-[26px]">
               Areas of Interest
@@ -126,9 +129,9 @@ const SignupUserInterest = () => {
             )}
             />
 
-            <button className="cursor-pointer [border:none] p-[21px] bg-darkblue-100 self-stretch rounded-[9.08px] flex flex-row flex-wrap items-center justify-center hover:bg-mediumslateblue hover:cursor-pointer active:bg-midnightblue">
+            <button className="cursor-pointer [border:none] p-[21px] bg-darkblue-100 self-stretch rounded-[9.08px] flex flex-row flex-wrap items-center justify-center hover:bg-mediumslateblue hover:cursor-pointer active:bg-midnightblue" type="submit">
               <div className="relative text-[21.8px] tracking-[0.18px] leading-[25.42px] font-medium font-inter text-white text-left whitespace-nowrap mq450:text-[17px] mq450:leading-[20px]"
-              onClick={handleSubmit}>
+              >
                 Sign Up
               </div>
             </button>
