@@ -1,6 +1,7 @@
 import { useState, useCallback } from "react";
 import AddCollaboratorPopup from "../../components/popups/AddCollaboratorPopup";
 import PortalPopup from "../../components/portals/PortalPopup";
+import ProjectCode from "../../components/datagrids/ProjectCode";
 
 const SingleProjectFile = () => {
   const [isAddCollaboratorPopupOpen, setAddCollaboratorPopupOpen] =
@@ -14,13 +15,20 @@ const SingleProjectFile = () => {
     setAddCollaboratorPopupOpen(false);
   }, []);
 
+  const name = localStorage.getItem('projectName');
+
+  const handleCommitHistoryClick = () => {
+    localStorage.setItem('selectedFrame','commitHistory');
+    window.location.reload();
+  }
+
   return (
     <>
       <div className="w-[1410px] bg-white overflow-hidden flex flex-col items-start justify-start pt-[3px] pb-12 pr-4 pl-2 box-border gap-[19px]">
         <header className="self-stretch flex flex-col items-start justify-start py-0 pr-px pl-0 gap-[46px] text-left text-7xl text-black font-inter">
           <div className="self-stretch flex flex-row items-end justify-start gap-[47px]">
             <h2 className="m-0 flex-1 relative text-inherit capitalize font-medium font-inherit">
-              Native CRUD Operation (Mobile Application Project)
+             {name}
             </h2>
             <div
               className="w-[237px] flex flex-row items-center justify-start gap-[7px] cursor-pointer z-[1] text-base text-blueviolet-100"
@@ -50,15 +58,18 @@ const SingleProjectFile = () => {
                 <div className="h-[22px] relative capitalize font-medium inline-block shrink-0">
                   Source Files
                 </div>
-                <div className="self-stretch h-0.5 relative box-border border-t-[2px] border-solid border-darkslateblue" />
+                <div className="self-stretch h-0.5 relative" >
+                   <ProjectCode />
+                </div>
               </div>
               <div className="h-[25px] flex-1 flex flex-col items-start justify-start gap-[3px]">
-                <input
-                  className="w-full [border:none] [outline:none] font-medium font-inter text-mini bg-[transparent] self-stretch h-[22px] relative capitalize text-text text-left inline-block shrink-0 min-w-[72px]"
-                  placeholder="Commit History"
-                  type="text"
-                />
-                <div className="self-stretch h-0.5 relative box-border border-t-[2px] border-solid border-darkslateblue" />
+                <div
+                  className="w-full [border:none] [outline:none] font-medium font-inter text-mini bg-[transparent] self-stretch h-[22px] relative capitalize text-text text-left inline-block shrink-0 min-w-[72px]
+                  hover:font-bold hover:cursor-pointer"
+                  onClick={handleCommitHistoryClick}
+                >
+                Commit History
+                </div>
               </div>
             </div>
             <div className="relative text-sm text-darkslategray-100 text-right cursor-pointer hover:[text-decoration:underline]">
@@ -66,7 +77,7 @@ const SingleProjectFile = () => {
             </div>
           </div>
         </header>
-        <section className="self-stretch h-[442px] box-border flex flex-row items-start justify-center py-5 pr-2.5 pl-0 border-[1px] border-solid border-black">
+        <section className="self-stretch h-[442px]">
           <div className="h-[442px] w-[1380px] relative box-border hidden border-[1px] border-solid border-black" />
           <div className="h-[58px] flex-1 relative bg-whitesmoke-200 overflow-hidden z-[1]" />
         </section>
