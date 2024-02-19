@@ -19,6 +19,7 @@ import ExtendedLogo from "../../components/logo/ExtendedLogo";
 import { useNavigate } from "react-router-dom";
 import countryData from "../data/countryData";
 import { saveData } from "../../utils/LocalStorageUtils";
+import axios from 'axios';
 
 const SignupUserInformation = () => {
   const navigate = useNavigate();

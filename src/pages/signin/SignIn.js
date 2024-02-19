@@ -5,6 +5,7 @@ import ExtendedLogo from "../../components/logo/ExtendedLogo";
 import { useNavigate } from "react-router-dom";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { saveData } from '../../utils/LocalStorageUtils';
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -58,32 +59,46 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault(); 
-   // console.log("info: ", email, password);
-   const signin = {
-    email: email,
-    password: password
-  };
   
-  fetch("https://devsprint-server.onrender.com/signin", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(signin),
-  })
+    const signin = {
+      email: email,
+      password: password
+    };
+    
+    fetch("http://localhost:5000/signin", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signin),
+    })
     .then((response) => {
       if (response.status === 200) {
-        return response.json();
+        return response.json(); 
       } 
       else if(response.status === 500) {
-        throw new Error("Sign in failed");
+        window.alert("Username or password does not match");
+      }
+      else if(response.status === 404) {
+        window.alert("User not found");
+      }
+      throw new Error("Failed to signin");
+    })
+    .then((data) => { 
+      if(data.userMatched === 1)
+      {
+        localStorage.clear();
+        localStorage.setItem('selectedFrame',"profile");
+        saveData('userID',data.userID); 
+        window.alert("Signin successful!");
+        navigate("/template");
       }
     })
     .catch((error) => {
       console.log("Error occurred:", error);
-    
     });
   };
+  
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

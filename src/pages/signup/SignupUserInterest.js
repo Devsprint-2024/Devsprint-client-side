@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import ExtendedLogo from "../../components/logo/ExtendedLogo";
 import disciplinesData from "../data/disciplinesData";
-import { updateData } from "../../utils/LocalStorageUtils"; 
+import { updateData, getData, saveData } from "../../utils/LocalStorageUtils"; 
 
 const SignupUserInterest = () => {
   const navigate = useNavigate();
@@ -57,21 +57,36 @@ const SignupUserInterest = () => {
   }, []);
 
   const [user, setUser] = useState([]);
- // console.log(selectedDisciplines.discipline);
-  const handleSubmit = () => {
+
+  const handleSubmit = (e) => {
+    e.preventDefault(); 
     const userData = getData('user');
-    if (userData) 
-    {
       const updatedUserData = {
         ...userData,
         discipline: selectedDisciplines?.discipline,
         designation: selectedDesignation,
       };
-    }
-    console.log(updatedUserData);
-    
+      //send updated data to backend
+     
+     fetch("http://localhost:5000/signup", {
+       method: "POST",
+       headers: {
+         "Content-Type": "application/json",
+       },
+       body: JSON.stringify(updatedUserData),
+     })
+       .then((response) => {
+         if (response.status === 200) {
+           window.alert("signup successful!");
+           navigate("/signin");
+         } 
+       })
+       .catch((error) => {
+         console.log("Error occurred:", error);
+       
+       });
+  };
 
-};
   
   return (
     <footer className="w-full bg-aliceblue overflow-hidden flex flex-col items-start justify-start pt-[34px] px-[37px] pb-[167px] box-border gap-[188px] tracking-[normal] text-left text-xl font-lalezar mq450:gap-[188px] mq1025:gap-[188px]">
@@ -129,7 +144,7 @@ const SignupUserInterest = () => {
             )}
             />
 
-            <button className="cursor-pointer [border:none] p-[21px] bg-darkblue-100 self-stretch rounded-[9.08px] flex flex-row flex-wrap items-center justify-center hover:bg-mediumslateblue hover:cursor-pointer active:bg-midnightblue" type="submit">
+            <button className="cursor-pointer [border:none] p-[21px] bg-darkblue-100 self-stretch rounded-[9.08px] flex flex-row flex-wrap items-center justify-center hover:bg-mediumslateblue hover:cursor-pointer active:bg-midnightblue">
               <div className="relative text-[21.8px] tracking-[0.18px] leading-[25.42px] font-medium font-inter text-white text-left whitespace-nowrap mq450:text-[17px] mq450:leading-[20px]"
               >
                 Sign Up

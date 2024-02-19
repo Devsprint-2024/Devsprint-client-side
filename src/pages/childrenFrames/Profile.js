@@ -1,6 +1,39 @@
 import PieChart from "../../components/charts/PieChart";
+import axios from 'axios';
+import { useEffect, useState } from "react";
+import { getData } from "../../utils/LocalStorageUtils";
 
 const Profile = () => {
+
+  const [name, setName] = useState(null);
+  const [city, setCity] = useState(null);
+  const [country, setCountry] = useState(null);
+  const [pic, setPic] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const [designation, setDesignation] = useState(null);
+  const [disclipline, setDisclipline] = useState(null);
+  const id = localStorage.getItem('userID');
+  
+  useEffect(() => {
+    axios.get(`http://localhost:5000/fetch-profile-info/${id}`)
+      .then(response => {
+        const data = response.data; 
+        setName(data.user.FirstName+" "+data.user.LastName);
+        setCity(data.user.City);
+        setCountry(data.user.Country);
+        setEmail(data.user.Email);
+        setPic(data.user.Profile_Pic);
+        setPhone(data.user.Phone),
+        setDesignation(data.user.Designation);
+        setDisclipline(data.user.Disclipline);
+      })
+      .catch(error => {
+        console.error('Error fetching profile information:', error);
+      });
+  }, [id]); 
+  
+
   return (
     <div className="w-[1401px] bg-white overflow-hidden flex flex-row flex-wrap items-start justify-start pt-[29px] pb-[23px] pr-14 pl-[38px] box-border gap-[31px] tracking-[normal] text-left text-base text-text font-roboto mq700:gap-[31px] mq700:pr-7 mq700:box-border">
       <div className="w-[275px] rounded-xl bg-white shadow-[0px_0px_10px_rgba(0,_0,_0,_0.25)] overflow-hidden shrink-0 flex flex-col items-center justify-start pt-[34px] pb-[118px] pr-[27px] pl-7 box-border gap-[22px] mq650:pt-[22px] mq650:pb-[77px] mq650:box-border">
@@ -11,7 +44,7 @@ const Profile = () => {
                 className="absolute w-[calc(100%_-_10px)] top-[5px] right-[5px] left-[5px] rounded-[200px] max-w-full overflow-hidden h-36 object-cover"
                 loading="eager"
                 alt=""
-                src="/profilepic.png"
+                src={pic}
               />
               <div className="absolute top-[0px] left-[0px] rounded-[50%] box-border w-full h-full z-[1] border-[0px] border-solid border-primary-brand" />
             </div>
@@ -19,10 +52,10 @@ const Profile = () => {
         </div>
         <div className="flex flex-col items-end justify-start py-0 px-5 text-center">
           <b className="relative tracking-[0.2px] leading-[24px]">
-            Mayeesha Musarrat
+            {name}
           </b>
           <div className="relative tracking-[0.2px] leading-[24px]">
-            Ahmedabad, Gujarat
+            {city+", "+country}
           </div>
         </div>
         <div className="self-stretch h-[35px] flex flex-col items-start justify-start gap-[11px]">
@@ -37,8 +70,8 @@ const Profile = () => {
                   src="/person.svg"
                 />
               </div>
-              <div className="relative tracking-[0.2px] leading-[24px]">
-                UI - Intern
+              <div className="relative tracking-[0.2px] leading-[24px] text-sm">
+               {designation+" - "+disclipline}
               </div>
             </div>
           </div>
@@ -54,7 +87,7 @@ const Profile = () => {
                 src="/contact.svg"
               />
               <div className="relative tracking-[0.2px] leading-[24px] whitespace-nowrap">
-                +91 7048144030
+                {phone}
               </div>
             </div>
           </div>
@@ -68,7 +101,7 @@ const Profile = () => {
               src="/mail.svg"
             />
             <div className="relative tracking-[0.2px] leading-[24px] whitespace-nowrap">
-              yghori@asite.com
+             {email}
             </div>
           </div>
         </div>

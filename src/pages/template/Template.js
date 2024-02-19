@@ -10,6 +10,7 @@ import CreateProject from "../childrenFrames/CreateProject";
 import CodeEditor from "../childrenFrames/CodeEditor";
 import CommitHistory from "../childrenFrames/CommitHistory";
 import ActiveDomains from "../childrenFrames/ActiveDomains";
+import axios from 'axios';
 import SingleProjectFile from "../childrenFrames/SingleProjectFile";
 
 function Template({ children }) {
@@ -17,6 +18,25 @@ function Template({ children }) {
   const [selectedFrame, setSelectedFrame] = useState(localStorage.getItem('selectedFrame'));
   const [selectedOption, setSelectedOption] = useState(null);
 
+  const [name, setName] = useState(null);
+  const [city, setCity] = useState(null);
+  const [country, setCountry] = useState(null);
+  const [pic, setPic] = useState(null);
+  const id = localStorage.getItem('userID');
+  
+  useEffect(() => {
+    axios.get(`http://localhost:5000/fetch-profile-info/${id}`)
+      .then(response => {
+        const data = response.data; 
+        setName(data.user.FirstName+" "+data.user.LastName);
+        setCity(data.user.City);
+        setCountry(data.user.Country);
+        setPic(data.user.Profile_Pic);
+      })
+      .catch(error => {
+        console.error('Error fetching profile information:', error);
+      });
+  }, [id]); 
   
   const openFrame = useCallback(() => {
     setFrameOpen(true);
@@ -97,16 +117,16 @@ function Template({ children }) {
               </div>
               <div className="flex flex-row items-start justify-start gap-[16px]">
                 <div className="flex flex-col items-end justify-start gap-[3px]">
-                  <div className="relative">Mayeesha Musarrat</div>
+                  <div className="relative">{name}</div>
                   <div className="relative text-sm text-slategray">
-                    Dhaka,Bangladesh
+                    {city+", "+country}
                   </div>
                 </div>
                 <img
-                  className="h-[38px] w-[38px] relative object-cover"
+                  className="h-[38px] w-[38px] relative object-cover rounded-[200px]"
                   loading="eager"
                   alt=""
-                  src="/mask-group@2x.png"
+                  src={pic}
                 />
               </div>
             </div>
